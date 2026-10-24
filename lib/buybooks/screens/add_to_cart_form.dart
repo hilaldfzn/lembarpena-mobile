@@ -4,6 +4,7 @@ import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:lembarpena/buybooks/screens/buybooks_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class CartFormPage extends StatefulWidget {
   final Book book;
@@ -73,7 +74,7 @@ class _CartFormPageState extends State<CartFormPage> {
                   if (_formKey.currentState!.validate()) {
                     // Kirim ke Django dan tunggu respons
                     final response = await request.postJson(
-                        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/create-flutter/$bookId/",
+                        "$baseUrl/buybooks/create-flutter/$bookId/",
                         jsonEncode(<String, dynamic>{
                           'quantity': _quantity,
                         }));

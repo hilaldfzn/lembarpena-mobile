@@ -4,6 +4,7 @@ import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
+import 'package:lembarpena/config.dart';
 
 class BookFormPage extends StatefulWidget {
   const BookFormPage({super.key});
@@ -332,7 +333,7 @@ class _BookFormPageState extends State<BookFormPage> {
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
               final response = await request.postJson(
-                "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/create-book-flutter/",
+                "$baseUrl/registerbook/create-book-flutter/",
                 jsonEncode(<String, String>{
                   'title': _title,
                   'author': _author,

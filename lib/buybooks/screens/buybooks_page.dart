@@ -8,6 +8,7 @@ import 'package:lembarpena/Main/widgets/left_drawer.dart';
 import 'package:lembarpena/buybooks/screens/cart_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:lembarpena/config.dart';
 
 class BuyBooksPage extends StatefulWidget {
   const BuyBooksPage({Key? key}) : super(key: key);
@@ -30,7 +31,6 @@ class _BuyBooksPageState extends State<BuyBooksPage> {
       queryParams['rating_lt'] = '4';
     }
 
-    String baseUrl = 'https://lembarpena-c09-tk.pbp.cs.ui.ac.id';
     String path = '/buybooks/show_books_json/';
     String queryString = Uri(queryParameters: queryParams).query;
 

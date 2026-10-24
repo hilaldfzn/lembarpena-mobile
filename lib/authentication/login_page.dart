@@ -5,6 +5,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:lembarpena/authentication/register.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
+import 'package:lembarpena/config.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -189,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                           // Untuk menyambungkan Android emulator dengan Django pada localhost,
                           // gunakan URL http://10.0.2.2/
                           final response = await request.login(
-                              "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/login/",
+                              "$baseUrl/auth/login/",
                               {
                                 'username': username,
                                 'password': password,

@@ -9,6 +9,7 @@ import 'package:lembarpena/wishlist/screens/detail_buku.dart';
 import 'package:lembarpena/authentication/login_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class ExploreBooksPage extends StatefulWidget {
   const ExploreBooksPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
     }
 
     final response = await request.postJson(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
+        '$baseUrl/wishlist/delete_wishlist_item_flutter/$pkWishlist/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -64,7 +65,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
       queryParams['rating_lt'] = '4';
     }
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_books_json/?rating=$queryParams');
+        '$baseUrl/buybooks/show_books_json/?rating=$queryParams');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -76,7 +77,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
 
   Future<void> fetchWishlist() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
+        '$baseUrl/wishlist/mywishlist/json');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -91,7 +92,7 @@ class _ExploreBooksPageState extends State<ExploreBooksPage> {
   Future<void> addToWishlist(
       CookieRequest request, int bookId, int preference) async {
     final response = await request.postJson(
-      "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/add_to_wishlist_flutter/",
+      "$baseUrl/wishlist/add_to_wishlist_flutter/",
       jsonEncode(
           {'username': uname, "book_id": bookId, 'preference': preference}),
     );

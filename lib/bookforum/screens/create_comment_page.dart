@@ -3,6 +3,7 @@ import 'package:lembarpena/bookforum/screens/comment_page.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class CreateCommentPage extends StatefulWidget {
   final int forumHeadId;
@@ -66,7 +67,7 @@ class _CreateCommentPageState extends State<CreateCommentPage> {
                       _formKey.currentState!.save();
                       final response = await request.postJson(
                         // "http://10.0.2.2:8000/bookforum/create_comments_flutter/${widget.forumHeadId}",
-                        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/create_comments_flutter/${widget.forumHeadId}",
+                        "$baseUrl/bookforum/create_comments_flutter/${widget.forumHeadId}",
 
                         jsonEncode({"answer": comment}),
                       );

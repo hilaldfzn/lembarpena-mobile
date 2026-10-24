@@ -6,6 +6,7 @@ import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:lembarpena/Main/screens/landing_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -121,7 +122,7 @@ class LeftDrawer extends StatelessWidget {
             // Bagian redirection ke ShopFormPage
             onTap: () async {
               final response = await request.logout(
-                  "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/logout/");
+                  "$baseUrl/auth/logout/");
               // await request.login("http://10.0.2.2:8000/auth/login/", {
               String message = response["message"];
               if (response['status']) {

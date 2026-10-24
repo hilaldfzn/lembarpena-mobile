@@ -4,6 +4,7 @@ import 'package:lembarpena/AdminRegisterBook/models/notification.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/admin_menu.dart';
 import 'package:lembarpena/AdminRegisterBook/screens/book_collections.dart';
 import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
+import 'package:lembarpena/config.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _NotificationPageState extends State<NotificationPage> {
   void fetchNotifications() async {
     final response = await http.get(
         Uri.parse(
-            'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/get-notif/'),
+            '$baseUrl/registerbook/get-notif/'),
         headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
@@ -40,7 +41,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   void deleteNotification(int notifId) async {
     final response = await http.delete(Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/delete-notification/$notifId/'));
+        '$baseUrl/registerbook/delete-notification/$notifId/'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -54,7 +55,7 @@ class _NotificationPageState extends State<NotificationPage> {
   void markNotificationAsRead(int notifId) async {
     final response = await http.get(
         Uri.parse(
-            'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/mark-notification-read/$notifId/'),
+            '$baseUrl/registerbook/mark-notification-read/$notifId/'),
         headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
@@ -73,7 +74,7 @@ class _NotificationPageState extends State<NotificationPage> {
       if (!notif.fields.isRead) {
         final response = await http.get(
             Uri.parse(
-                'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/mark-notification-read/${notif.pk}/'),
+                '$baseUrl/registerbook/mark-notification-read/${notif.pk}/'),
             headers: {"Content-Type": "application/json"});
 
         if (response.statusCode == 200) {

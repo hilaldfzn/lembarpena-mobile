@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import 'package:lembarpena/checkoutbook/models/checkout.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
+import 'package:lembarpena/config.dart';
 
 class MyOrderPage extends StatefulWidget {
   const MyOrderPage({super.key});
@@ -27,7 +28,7 @@ class _MyOrderPageState extends State<MyOrderPage> {
 
   Future<List<Checkoutbook>> fetchOrder() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_order_json_all/');
+        '$baseUrl/checkoutbook/get_order_json_all/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));
