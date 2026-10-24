@@ -170,7 +170,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text("Komentar berhasil ditambahkan!"),
+                          content: Text("Forum berhasil dibuat!"),
                         ),
                       );
                       // Navigator.pop(context); // Kembali ke halaman sebelumnya

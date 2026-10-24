@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/Main/screens/menu.dart';
 import 'package:lembarpena/bookforum/screens/forum_page.dart';
-import 'dart:convert';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 import 'package:lembarpena/checkoutbook/models/checkout.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
@@ -19,7 +18,6 @@ class MyOrderPage extends StatefulWidget {
 
 class _MyOrderPageState extends State<MyOrderPage> {
   late Future<List<Checkoutbook>> futureOrder;
-  late String loggedInUser = LoginPage.uname;
   @override
   void initState() {
     super.initState();
@@ -27,17 +25,17 @@ class _MyOrderPageState extends State<MyOrderPage> {
   }
 
   Future<List<Checkoutbook>> fetchOrder() async {
-    var url = Uri.parse(
-        '$baseUrl/checkoutbook/get_order_json_all/');
-    var response =
-        await http.get(url, headers: {"Content-Type": "application/json"});
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // Sent through CookieRequest so the session cookie identifies the user;
+    // the backend only returns that user's orders.
+    final request = context.read<CookieRequest>();
+    var data = await request.get('$baseUrl/checkoutbook/get_order_json_all/');
+    if (data is! List) {
+      throw Exception(data['message'] ?? 'Gagal memuat pesanan.');
+    }
 
     List<Checkoutbook> fetchedOrder = [];
     for (var item in data) {
-      if (item['fields']['user'] == loggedInUser) {
-        fetchedOrder.add(Checkoutbook.fromJson(item));
-      }
+      fetchedOrder.add(Checkoutbook.fromJson(item));
     }
     return fetchedOrder;
   }

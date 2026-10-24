@@ -38,7 +38,7 @@ class Fields {
   String user;
   String alamat;
   String metodePembayaran;
-  int totalPrice;
+  double totalPrice;
 
   Fields({
     required this.user,
@@ -51,7 +51,7 @@ class Fields {
         user: json["user"],
         alamat: json["alamat"],
         metodePembayaran: json["metode_pembayaran"],
-        totalPrice: json["total_price"],
+        totalPrice: (json["total_price"] as num).toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
