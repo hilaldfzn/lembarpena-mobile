@@ -11,6 +11,7 @@ import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:lembarpena/config.dart';
 
 class ForumPage extends StatefulWidget {
   const ForumPage({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeads() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
+        '$baseUrl/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -45,7 +46,7 @@ class _ForumPageState extends State<ForumPage> {
   Future<List<ForumHead>> fetchForumHeadsPopular() async {
     // var url = Uri.parse('http://10.0.2.2:8000/bookforum/forum/json/'); // Sesuaikan dengan URL endpoint Anda
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
+        '$baseUrl/bookforum/show_forum_json_popular_only/'); // Sesuaikan dengan URL endpoint Anda
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -63,7 +64,7 @@ class _ForumPageState extends State<ForumPage> {
       CookieRequest request, String username, int id) async {
     // final response = await request.postJson('http://10.0.2.2:8000/bookforum/delete_question_flutter/$username/$id',
     final response = await request.postJson(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/delete_question_flutter/$username/$id',
+        '$baseUrl/bookforum/delete_question_flutter/$username/$id',
         jsonEncode({}));
 
     if (response['status'] == 'success') {

@@ -6,6 +6,7 @@ import 'package:lembarpena/authentication/login_page.dart';
 import 'package:lembarpena/buybooks/models/cart_item.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   Future<double> fetchHarga() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/get_total_harga/$uname/');
+        '$baseUrl/checkoutbook/get_total_harga/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -50,7 +51,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   Future<List<CartItem>> fetchProduct() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/show_checkout_json/$uname/');
+        '$baseUrl/checkoutbook/show_checkout_json/$uname/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -211,7 +212,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     try {
       final response = await request.postJson(
-        "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/checkoutbook/checkout_flutter/",
+        "$baseUrl/checkoutbook/checkout_flutter/",
         jsonEncode({
           "alamat": alamatController.text,
           "metode_pembayaran": _groupValue,

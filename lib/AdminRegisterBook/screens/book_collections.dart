@@ -6,6 +6,7 @@ import 'package:lembarpena/AdminRegisterBook/widgets/admin_left_drawer.dart';
 import 'package:lembarpena/wishlist/screens/detail_buku.dart'; // Import your book detail page here
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:lembarpena/config.dart';
 
 class BookCollectionsPage extends StatefulWidget {
   const BookCollectionsPage({Key? key}) : super(key: key);
@@ -29,7 +30,6 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
       queryParams['rating_filter'] = ratingFilterMap[ratingFilter]!;
     }
 
-    String baseUrl = 'https://lembarpena-c09-tk.pbp.cs.ui.ac.id';
     String path = '/registerbook/get-book/';
     String queryString = Uri(queryParameters: queryParams).query;
 
@@ -46,7 +46,7 @@ class _BookCollectionsPageState extends State<BookCollectionsPage> {
 
   Future<void> deleteBook(int bookId) async {
     final url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/registerbook/delete-book-ajax/$bookId/');
+        '$baseUrl/registerbook/delete-book-ajax/$bookId/');
 
     final response = await http.delete(url);
 

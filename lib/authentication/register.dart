@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:animate_do/animate_do.dart';
 import 'package:lembarpena/authentication/login_page.dart'; // Asumsi Anda memiliki halaman ini
+import 'package:lembarpena/config.dart';
 
 void main() => runApp(const MaterialApp(
     debugShowCheckedModeBanner: false, home: RegistrationPage()));
@@ -23,7 +24,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   Future<void> _registerUser() async {
     final url =
-        Uri.parse("https://lembarpena-c09-tk.pbp.cs.ui.ac.id/auth/register/");
+        Uri.parse("$baseUrl/auth/register/");
     final response = await http.post(url,
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({

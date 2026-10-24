@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:lembarpena/AdminRegisterBook/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class CreateForumPage extends StatefulWidget {
   const CreateForumPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
   Future<List<Book>> fetchBooks() async {
     // var url = Uri.parse('http://10.0.2.2:8000/buybooks/show_books_json');
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_books_json/');
+        '$baseUrl/buybooks/show_books_json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -156,7 +157,7 @@ class _CreateForumPageState extends State<CreateForumPage> {
                     _formKey.currentState!.save();
                     final response = await request.postJson(
                       // "http://10.0.2.2:8000/bookforum/create_question_flutter/",
-                      "https://lembarpena-c09-tk.pbp.cs.ui.ac.id/bookforum/create_question_flutter/",
+                      "$baseUrl/bookforum/create_question_flutter/",
                       jsonEncode({
                         "question": _question,
                         "book_id": _selectedBook?.pk,

@@ -8,6 +8,7 @@ import 'package:lembarpena/bookforum/screens/forum_page.dart';
 import 'package:lembarpena/wishlist/models/wishlist.dart';
 import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'dart:convert';
+import 'package:lembarpena/config.dart';
 
 class WishlistPage extends StatefulWidget {
   final Book? selectedBook; // Tambahkan field untuk buku yang dipilih
@@ -37,7 +38,7 @@ class _WishlistPageState extends State<WishlistPage> {
 
   Future<List<Wishlist>> fetchWishlist() async {
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/wishlist/mywishlist/json');
+        '$baseUrl/wishlist/mywishlist/json');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
     var data = jsonDecode(utf8.decode(response.bodyBytes));

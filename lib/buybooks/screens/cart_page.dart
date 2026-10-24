@@ -9,6 +9,7 @@ import 'package:lembarpena/wishlist/screens/explore_book.dart';
 import 'package:lembarpena/checkoutbook/screens/checkoutpage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:lembarpena/config.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _CartPageState extends State<CartPage> {
   Future<List<CartItem>> fetchCartItems() async {
     String uname = LoginPage.uname;
     var url = Uri.parse(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/show_cart_json/$uname/');
+        '$baseUrl/buybooks/show_cart_json/$uname/');
     var response =
         await http.get(url, headers: {"Content-Type": "application/json"});
 
@@ -60,7 +61,7 @@ class _CartPageState extends State<CartPage> {
   Future<void> removeItemFromCart(CookieRequest request, int itemId) async {
     // Implementasi fungsi untuk menghapus item dari keranjang
     final response = await request.postJson(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/delete_cart_flutter/$itemId/',
+        '$baseUrl/buybooks/delete_cart_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
@@ -89,7 +90,7 @@ class _CartPageState extends State<CartPage> {
       itemsChecked[itemId] = value ?? false;
     });
     final response = await request.postJson(
-        'https://lembarpena-c09-tk.pbp.cs.ui.ac.id/buybooks/selected_flutter/$itemId/',
+        '$baseUrl/buybooks/selected_flutter/$itemId/',
         jsonEncode({}));
 
     if (response['status'] == 'success') {
